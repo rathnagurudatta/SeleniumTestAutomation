@@ -4,21 +4,25 @@ package selenium_apis;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.time.Duration;
 
 public class FileUploadTest  {
 
     private WebDriver driver = new ChromeDriver();
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     @Test
     public void fileUploadUsingSendKeys() throws InterruptedException {
         driver.navigate().to("https://the-internet.herokuapp.com/upload");
-        Thread.sleep(3000);
-        driver.findElement(By.id("file-upload")).sendKeys(System.getProperty("user.dir") + "/src/test/resources/testdata/Inspiration.png");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("file-upload"))).sendKeys(System.getProperty("user.dir") + "/src/test/resources/testdata/Inspiration.png");
+        //driver.findElement(By.id("file-upload")).sendKeys(System.getProperty("user.dir") + "/src/test/resources/testdata/Inspiration.png");
         Thread.sleep(3000);
 
     }
